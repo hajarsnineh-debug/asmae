@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Anniversaire !</title>
+    <style>
+        /* --- CSS : Le Design --- */
+        body {
+            background-color: #fce4ec; /* Rose très pâle */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 20px;
+            border: 8px solid #f06292; /* Bordure rose foncée */
+            text-align: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
+            z-index: 10;
+        }
+
+        h1 { color: #d81b60; margin-bottom: 10px; }
+        p { color: #555; line-height: 1.6; }
+
+        .btn {
+            background-color: #f06292;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s, background-color 0.2s;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #e91e63;
+            transform: scale(1.05);
+        }
+
+        /* Classes pour masquer/afficher les étapes */
+        .hidden { display: none; }
+
+        /* Animation de l'enveloppe */
+        .envelope-icon { font-size: 50px; margin-bottom: 10px; }
+        
+        /* Petits coeurs flottants */
+        .heart {
+            position: absolute;
+            color: #f06292;
+            font-size: 20px;
+            animation: float 3s linear infinite;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-10vh) rotate(360deg); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="step1" class="container">
+        <h1>Happy Birthday, cutie! 💐</h1>
+        <p>Your surprise is just a click away...</p>
+        <button class="btn" onclick="nextStep(2)">Next →</button>
+    </div>
+
+    <div id="step2" class="container hidden">
+        <div class="envelope-icon">💌</div>
+        <h1>knock knock... open me upp!</h1>
+  
+        <button class="btn" onclick="nextStep(3)">Open Envelope</button>
+    </div>
+
+    <div id="step3" class="container hidden">
+        <h1>Dear Asmae 🌸</h1>
+        <p>
+            Happy birthday to the best sister ever🥰! Thank you for being there and make even the simplest moments so special.
+          Let's make this year full of unforgettable memories,endless laughs and all the things we've been dreaming about😝.   </p>
+        <p>
+            I wish you all the happiness, success and love in the world.
+            May this year bring you countless reasons to smile :)
+        </p>
+        <p><strong>With love ❤️
+    -Hajour
+        </strong></p>
+       
+    </div>
+
+    <script>
+        /* --- JavaScript : La Logique --- */
+
+        function nextStep(stepNumber) {
+            // Masquer toutes les étapes
+            document.getElementById('step1').classList.add('hidden');
+            document.getElementById('step2').classList.add('hidden');
+            document.getElementById('step3').classList.add('hidden');
+
+            // Afficher l'étape demandée
+            document.getElementById('step' + stepNumber).classList.remove('hidden');
+
+            // Si c'est l'étape finale, on lance les coeurs
+            if (stepNumber === 3) {
+                startHearts();
+            }
+        }
+
+        // Fonction pour créer des petits coeurs qui flottent
+        function startHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = (Math.random() * 2 + 3) + 's';
+                document.body.appendChild(heart);
+
+                setTimeout(() => { heart.remove(); }, 5000);
+            }, 300);
+        }
+    </script>
+</body>
+</html>
